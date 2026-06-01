@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import pwndbg
-from .process import Process
 
 class Project:
     """
@@ -18,6 +17,3 @@ class Project:
 
     def set_env(self, env: dict[str, str]) -> None:
         self.env = env
-
-    def run(self) -> Process:
-        return Process(self)

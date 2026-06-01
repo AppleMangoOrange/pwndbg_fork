@@ -226,6 +226,7 @@ class Group(Enum):
     GDB = "gdb"
     LLDB = "lldb"
     DBG = "dbg"
+    API = "api"
     CROSS_ARCH_USER = "cross-arch-user"
 
     def __str__(self) -> str:
@@ -242,6 +243,8 @@ class Group(Enum):
                 return Path("tests/library/lldb/")
             case Group.DBG:
                 return Path("tests/library/dbg/")
+            case Group.API:
+                return Path("tests/api")
             case Group.CROSS_ARCH_USER:
                 return Path("tests/library/qemu_user/")
             case other:
@@ -253,7 +256,7 @@ class Group(Enum):
         binaries for a given test group.
         """
         match self:
-            case Group.GDB | Group.LLDB | Group.DBG:
+            case Group.GDB | Group.LLDB | Group.DBG | Group.API:
                 return Path("tests/binaries/host/")
             case Group.CROSS_ARCH_USER:
                 return Path("tests/binaries/qemu_user/")
@@ -281,6 +284,8 @@ class Driver(Enum):
                         return False
                     case Group.DBG:
                         return True
+                    case Group.API:
+                        return True
                     case Group.CROSS_ARCH_USER:
                         return True
             case Driver.LLDB:
@@ -290,6 +295,8 @@ class Driver(Enum):
                     case Group.LLDB:
                         return True
                     case Group.DBG:
+                        return True
+                    case Group.API:
                         return True
                     case Group.CROSS_ARCH_USER:
                         return False
